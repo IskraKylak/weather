@@ -2,24 +2,23 @@ import axios from "axios";
 
 export default {
     state: {
-        dayWeather: {},
+        forecast: {},
     },
     mutations: {
-        SET_DAYWEATHER(state, payload) {
-            state.dayWeather = payload
-        },
-        
+        SET_FORECAST(state, payload) {
+            state.forecast = payload
+        },  
     },
     actions: {
-        SET_DAYWEATHER ({commit}, payload) {
+        SET_FORECAST ({commit}, payload) {
             // обратимся к нашему комиту и візовем мутацию setNotify в кторую передадим payload
-            commit('SET_DAYWEATHER', payload)
+            commit('SET_FORECAST', payload)
         },
-        GET_DAYWEATHER_FROM_API({commit}, obj) {
-            return axios(`https://api.openweathermap.org/data/2.5/weather?lat=${obj.lat}&lon=${obj.lon}&units=metric&appid=04326dad12753de68c09cafdec856895`, {
+        GET_FORECAST_FROM_API({commit}, obj) {
+            return axios(`https://api.openweathermap.org/data/2.5/forecast?lat=${obj.lat}&units=metric&lon=${obj.lon}&appid=04326dad12753de68c09cafdec856895`, {
                 method: "GET"
             }).then((response) => {
-                commit('SET_DAYWEATHER', response.data)
+                commit('SET_FORECAST', response.data)
                 return response.data
             }).catch((error) => {
                 console.log(error)
@@ -28,8 +27,8 @@ export default {
         }
     },
     getters: {
-        DAYWEATHER (state) {
-            return state.dayWeather
+        FORECAST (state) {
+            return state.forecast
         },
     },
     modules: {

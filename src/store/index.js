@@ -1,5 +1,7 @@
 import { createStore } from 'vuex'
 import dayWeather from './dayWeather'
+import forecast from './forecast'
+
 export default createStore({
   state: {
   },
@@ -11,5 +13,6 @@ export default createStore({
   },
   modules: {
     dayWeather,
+    forecast
   }
 })

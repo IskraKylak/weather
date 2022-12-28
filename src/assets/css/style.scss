@@ -44,6 +44,14 @@ body{
     margin-left: auto;
     height: 100%;
   }
+
+  .autocomplete-field {
+    .form-control.form-control-md {
+        height: desktop-vw(30);
+        padding: 5px;
+        width: desktop-vw(250);
+    }
+  }
   
   @media screen and (max-width: $tablet) {
   }
@@ -56,3 +64,5 @@ body{
       height: 100%;
     }
   }
+
+
