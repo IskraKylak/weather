@@ -197,6 +197,10 @@ export default {
     // border: 1px solid #000;
     box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
     position: relative;
+
+    h2 {
+        font-size: desktop-vw(20);
+    }
 }
 
 .removeCard {
@@ -232,6 +236,37 @@ export default {
         background: #3b3c40;
         transform: rotate(-45deg);
         border-radius: 3px;
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .infoTown_grafic {
+        height: mobile-vw(250);
+    }
+
+    .cartWeather {
+        padding: mobile-vw(50) mobile-vw(10) mobile-vw(10);
+        h2 {
+            font-size: mobile-vw(20);
+            margin-bottom:  mobile-vw(10);
+        }
+    }
+
+    .removeCard {
+        top: mobile-vw(20);
+        right: mobile-vw(20);
+        height: mobile-vw(20);
+        width: mobile-vw(20);
+
+        &:before {
+            width: mobile-vw(20);
+            height: mobile-vw(4);
+        }
+
+        &:after {
+            width: mobile-vw(20);
+            height: mobile-vw(4);
+        }
     }
 }
 

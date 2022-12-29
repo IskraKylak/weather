@@ -101,6 +101,8 @@ export default {
 
 .infoDay {
     text-align: left;
+    font-size: desktop-vw(14);
+    margin-bottom: desktop-vw(14);
 
     &_temp {
         display: flex;
@@ -134,7 +136,34 @@ export default {
     }
 }
 
+@media screen and (max-width: $mobile) {
+    .infoDay {
+        font-size: mobile-vw(14);
+        margin-bottom: mobile-vw(14);
 
+        &_temp {
+            font-size: mobile-vw(18);
+        }
+
+        &_other {
+            grid-gap: mobile-vw(10);
+            margin-top: mobile-vw(10);
+
+            &_col { 
+                grid-gap: mobile-vw(5);
+            }
+
+            &_row {
+                grid-gap: mobile-vw(5);
+
+                svg {
+                    width: mobile-vw(16);
+                    height: mobile-vw(16);
+                }
+            }
+        }
+    }
+}
 
 </style>
 

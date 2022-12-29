@@ -156,4 +156,32 @@ export default {
     }
 }
 
+@media screen and (max-width: $mobile) {
+    .main {
+        grid-gap: mobile-vw(40);
+        padding-bottom: mobile-vw(50);
+    }
+
+    .addCart {
+        bottom: mobile-vw(50);
+        right: mobile-vw(50);
+        height: mobile-vw(50);
+        width: mobile-vw(50);
+
+        &:before {
+            top: calc(50% - mobile-vw(2));
+            left: calc(50% - mobile-vw(15));
+            width: mobile-vw(30);
+            height: mobile-vw(4);
+        }
+
+        &:after {
+            top: calc(50% - mobile-vw(2));
+            left: calc(50% - mobile-vw(15));
+            width: mobile-vw(30);
+            height: mobile-vw(4);
+        }
+    }
+}
+
 </style>

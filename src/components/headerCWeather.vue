@@ -148,6 +148,7 @@ export default {
 .inputTown {
     height: desktop-vw(30);
     padding: desktop-vw(5);
+    font-size: desktop-vw(14);
 }
 
 .wrapInput {
@@ -166,6 +167,7 @@ export default {
 .citiesItem {
     text-align: left;
     transition: all 0.3s ease;
+    font-size: desktop-vw(14);
     cursor: pointer;
 
     &:hover {
@@ -176,11 +178,43 @@ export default {
 .addFavorites {
     padding: desktop-vw(10) desktop-vw(5);
     cursor: pointer;
+    font-size: desktop-vw(14);
 }
 
 .favorite {
     width: desktop-vw(30);
     height: desktop-vw(30);
+}
+
+@media screen and (max-width: $mobile) {
+    .headerCard {
+        margin-bottom: mobile-vw(10);
+    }
+
+    .inputTown {
+        height: mobile-vw(30);
+        padding: mobile-vw(5);
+        font-size: mobile-vw(14);
+    }
+
+    .citiesItem {
+        font-size: mobile-vw(14);
+    }
+
+    .citiesList {
+        padding: mobile-vw(5);
+        top: mobile-vw(30);
+    }
+
+    .addFavorites {
+        padding: mobile-vw(10) mobile-vw(5);
+        font-size: mobile-vw(14);
+    }
+
+    .favorite {
+        width: mobile-vw(30);
+        height: mobile-vw(30);
+    }
 }
 
 </style>

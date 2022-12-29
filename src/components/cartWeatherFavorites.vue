@@ -198,6 +198,33 @@ export default {
     }
 }
 
+@media screen and (max-width: $mobile) {
+    .infoTown_grafic {
+        height: mobile-vw(250);
+    }
+
+    .cartWeather {
+        padding: mobile-vw(40);
+    }
+
+    .removeCard {
+        top: mobile-vw(20);
+        right: mobile-vw(20);
+        height: mobile-vw(20);
+        width: mobile-vw(20);
+
+        &:before {
+            width: mobile-vw(20);
+            height: mobile-vw(4);
+        }
+
+        &:after {
+            width: mobile-vw(20);
+            height: mobile-vw(4);
+        }
+    }
+}
+
 </style>
 
 

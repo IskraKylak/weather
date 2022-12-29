@@ -54,4 +54,11 @@ export default {
     grid-gap: desktop-vw(40);
     padding-bottom: desktop-vw(50);
 }
+
+@media screen and (max-width: $mobile) {
+    .favorites {
+        grid-gap: mobile-vw(40);
+        padding-bottom: mobile-vw(50);
+    }
+}
 </style>

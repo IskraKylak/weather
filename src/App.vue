@@ -49,4 +49,11 @@ nav {
     }
   }
 }
+
+@media screen and (max-width: $mobile) {
+    #message {
+        padding: mobile-vw(20);
+
+    }
+}
 </style>
