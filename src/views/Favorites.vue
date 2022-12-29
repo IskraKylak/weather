@@ -20,7 +20,11 @@ export default {
     },
     methods: {
         removeCard(data) {
+          this.REMOVE_FAVORITES(data)
         },
+        ...mapActions([
+            'REMOVE_FAVORITES'
+        ]),
     },
     computed: {
       ...mapGetters([
