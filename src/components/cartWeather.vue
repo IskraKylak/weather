@@ -2,7 +2,7 @@
   <div class="cartWeather">
     <div class="removeCard" @click="removeCard">
     </div>
-    <headerCWeather @changeCity="changeCity" @addFavorites="addFavorites" :content="content" />
+    <headerCWeather @changeCity="changeCity" @addFavorites="addFavorites" :content="content" :favorites="favorites" />
     <div class="infoTown" v-if="content.lat !== '' && content.lon !== ''">
         <!-- <div class="infoTown_wrapBtn">
             <button>Day</button>
@@ -44,6 +44,7 @@ export default {
     props:['content'],
     data() {
         return {
+            favorites: false,
             cord: {
                 lat: '',
                 lon: ''
@@ -93,6 +94,7 @@ export default {
             if(this.FAVORITES.length < 5) {
                 this.$message('Card added to favorites')
                 this.ADD_FAVORITES(obj)
+                this.favorites = true
             } else {
                 this.$message('Remove city to add')
             }
@@ -129,7 +131,21 @@ export default {
             // console.log('-----------')
             this.cord.lat = this.content.lat
             this.cord.lon = this.content.lon
+            
             if(this.content.lat !== '' && this.content.lon !== "") {
+
+                let tmpContent = this
+                let tmpMas = this.FAVORITES.filter(function(item) {
+                    if(item.lat == tmpContent.content.lat && item.lon == tmpContent.content.lon) {
+                        return item
+                    }
+                })
+                if(tmpMas.length !== 0) {
+                    this.favorites = true
+                } else {
+                    this.favorites = false
+                }
+
                 this.GET_DAYWEATHER_FROM_API(this.cord).then((response) => {
                     if(response) {
                         this.objCard.info = response
