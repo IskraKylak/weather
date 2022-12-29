@@ -1,22 +1,48 @@
 <template>
-  <div class="container">
-    <nav>
-      <router-link to="/">Main</router-link>
-      <router-link to="/favorites">Favorites</router-link>
-    </nav>
-    <router-view/>
-    <div id="message" class="hidden-xs"></div>
+  <div class="bodySite">
+    <div class="wrapImg">
+      <img src="@/assets/img/sky.jpg" alt="img">
+    </div>
+    
+    <div class="container">
+      <nav>
+        <router-link to="/">Main</router-link>
+        <router-link to="/favorites">Favorites</router-link>
+      </nav>
+      <router-view/>
+      <div id="message" class="hidden-xs"></div>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height: 100vh;
+}
+
+.bodySite {
   padding: desktop-vw(50) 0;
+  position: relative;
+
+  .wrapImg {
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    img {
+      position: absolute;
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+    }
+  }
 }
 
 #message {

@@ -193,6 +193,7 @@ export default {
 }
 
 .cartWeather {
+    background: #fff;
     padding: desktop-vw(40);
     // border: 1px solid #000;
     box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);

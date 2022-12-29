@@ -162,7 +162,7 @@ export default {
     background: #fff;
     box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
     padding: desktop-vw(5);
-    top: desktop-vw(30);
+    top: desktop-vw(40);
     z-index: 20;
 }
 
