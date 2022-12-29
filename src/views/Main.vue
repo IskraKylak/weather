@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <cartWeather v-for="(item, idx) in cardWeather" :key="idx" :content="item" @changeCity="changeCity" @removeCard="removeCard" />
+        <cartWeather v-for="(item, idx) in CARDWEATHER" :key="idx" :content="item" @changeCity="changeCity" @removeCard="removeCard" />
     </div>
     <button class="addCart" title="Add to card" @click="addFunction"></button>
 </template>
@@ -8,7 +8,7 @@
 <script>
 // @ is an alias to /src
 import cartWeather from '@/components/cartWeather.vue'
-
+import {mapActions, mapGetters} from 'vuex'
 export default {
     name: 'Main',
     components: { cartWeather },
@@ -23,50 +23,27 @@ export default {
             ],
         }
     },
+    computed: {
+      ...mapGetters([
+        'CARDWEATHER',
+      ]),
+    },
     methods: {
-        resetCardWeather() {
-            let mas = []
-            for(let i = 0; i < this.cardWeather.length; i++) {
-                mas.push(this.cardWeather[i])
-            }
-            this.cardWeather = []
-            for(let i = 0; i < mas.length; i++) {
-                this.cardWeather.push(mas[i])
-            }
-        },
+        ...mapActions([
+            'ADD_CARDWEATHER',
+            'REMOVE_CARDWEATHER',
+            'CHANGE_CARDWEATHER'
+        ]),
         changeCity(data) {
-            // console.log('changeCity')
-            // console.log(data)
-            const index = this.cardWeather.findIndex(item => item.idx === data.idx);
-            this.cardWeather[index].lat = data.lat
-            this.cardWeather[index].lon = data.lon
-            this.resetCardWeather()
-            // console.log(this.cardWeather)
-            // console.log('-----------')
+            this.CHANGE_CARDWEATHER(data)
         },
         removeCard(data) {
-            // console.log(data)
-            const index = this.cardWeather.findIndex(item => item.idx === data);
-            // console.log(index)
-            if(this.cardWeather.length !== 1) {
-                this.cardWeather.splice(index, 1);
-                this.resetCardWeather()
-            }
-            
-            // console.log('removeCard')
-            // console.log(this.cardWeather)
-            // console.log('--------')
+            this.REMOVE_CARDWEATHER(data)
         },
         addFunction() {
-            // console.log('addFunction')
-            
-            this.cardWeather.push({
-                lat: '',
-                lon: '',
-                idx: this.cardWeather[this.cardWeather.length - 1].idx + 1
-            })
-            // console.log(this.cardWeather)
-            // console.log('--------')
+            if(this.CARDWEATHER.length < 5) {
+                this.ADD_CARDWEATHER()
+            }
         }
     },
 }

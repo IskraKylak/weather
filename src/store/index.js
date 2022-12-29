@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 import dayWeather from './dayWeather'
 import forecast from './forecast'
 import favorites from './favorites'
-
+import main from './main'
 export default createStore({
   state: {
   },
@@ -15,6 +15,7 @@ export default createStore({
   modules: {
     dayWeather,
     forecast,
-    favorites
+    favorites,
+    main
   }
 })

@@ -81,13 +81,20 @@ export default {
             }
         }
     },
+    computed: {
+      ...mapGetters([
+        'FAVORITES',
+      ]),
+    },
     methods: {
         addFavorites() {
             let obj = {
                 lat: this.cord.lat,
                 lon: this.cord.lon,
             }
-            this.SET_FAVORITES(obj)
+            if(this.FAVORITES.length < 5) {
+                this.ADD_FAVORITES(obj)
+            }
         },
         removeCard() {
             // console.log(this.content.idx)
@@ -113,7 +120,7 @@ export default {
         ...mapActions([
             'GET_DAYWEATHER_FROM_API',
             'GET_FORECAST_FROM_API',
-            'SET_FAVORITES'
+            'ADD_FAVORITES'
         ]),
         apiWeather() {
             // console.log('this.content.lat')

@@ -4,7 +4,7 @@ export default {
         favorites: JSON.parse(localStorage.getItem('favorites')) || [],
     },
     mutations: {
-        SET_FAVORITES(state, payload) {
+        ADD_FAVORITES(state, payload) {
             state.favorites.push(payload)
 
             localStorage.setItem('favorites', JSON.stringify(state.favorites))
@@ -16,8 +16,8 @@ export default {
         }  
     },
     actions: {
-        SET_FAVORITES ({commit}, payload) {
-            commit('SET_FAVORITES', payload)
+        ADD_FAVORITES ({commit}, payload) {
+            commit('ADD_FAVORITES', payload)
         },
         REMOVE_FAVORITES ({commit}, payload) {
             commit('REMOVE_FAVORITES', payload)
