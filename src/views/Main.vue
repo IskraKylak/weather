@@ -59,7 +59,7 @@ export default {
             this.objChange = data
             // console.log(data)
             await axios({
-                url: `http://api.openweathermap.org/geo/1.0/direct?q=${data.name},${data.country}&limit=5&appid=04326dad12753de68c09cafdec856895`,
+                url: `https://api.openweathermap.org/geo/1.0/direct?q=${data.name},${data.country}&limit=5&appid=04326dad12753de68c09cafdec856895`,
                 method: 'GET',
             })
             .then(respons => {
