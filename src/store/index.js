@@ -3,6 +3,7 @@ import dayWeather from './dayWeather'
 import forecast from './forecast'
 import favorites from './favorites'
 import main from './main'
+import popup from './popup'
 export default createStore({
   state: {
   },
@@ -16,6 +17,7 @@ export default createStore({
     dayWeather,
     forecast,
     favorites,
-    main
+    main,
+    popup
   }
 })

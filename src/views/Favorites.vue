@@ -1,34 +1,47 @@
 <template>
     <div class="favorites">
-        <cartWeatherFavorites v-for="(item, idx) in FAVORITES" :key="idx" :content="item" @removeCard="removeCard" />
+        <cartWeatherFavorites v-for="(item, idx) in FAVORITES" :key="idx" :content="item" @removeCardModal="removeCardModal" />
     </div>
+    <popup v-if="POPUP" @removeCard="removeCard" @closePopup="closePackage"/>
 </template>
 
 <script>
 import cartWeatherFavorites from '@/components/cartWeatherFavorites.vue'
-
+import popup from '@/components/v-popup.vue'
 // @ is an alias to /src
 import {mapActions, mapGetters} from 'vuex'
 export default {
     name: 'Favorites',
-    components: { cartWeatherFavorites },
+    components: { cartWeatherFavorites, popup },
     data() {
         return {
+            objRemoveCart: {},
             cardWeather: [ 
             ],
         }
     },
     methods: {
+        removeCardModal(data) {
+            this.CHANGE_POPUP(true)
+            this.objRemoveCart = data 
+        },
         removeCard(data) {
-          this.REMOVE_FAVORITES(data)
+          if(data) {
+            this.CHANGE_POPUP(false)
+            this.REMOVE_FAVORITES(this.objRemoveCart)
+          } else {
+            this.CHANGE_POPUP(false)
+          }
         },
         ...mapActions([
-            'REMOVE_FAVORITES'
+            'REMOVE_FAVORITES',
+            'CHANGE_POPUP'
         ]),
     },
     computed: {
       ...mapGetters([
         'FAVORITES',
+        'POPUP'
       ]),
     },
 }

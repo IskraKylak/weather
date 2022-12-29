@@ -1,19 +1,24 @@
 <template>
     <div class="main">
-        <cartWeather v-for="(item, idx) in CARDWEATHER" :key="idx" :content="item" @changeCity="changeCity" @removeCard="removeCard" />
+        <cartWeather v-for="(item, idx) in CARDWEATHER" :key="idx" :content="item" @changeCity="changeCity" @removeCardModal="removeCardModal" />
     </div>
     <button class="addCart" title="Add to card" @click="addFunction"></button>
+    <popup v-if="POPUP" @removeCard="removeCard" @closePopup="closePackage"/>
 </template>
 
 <script>
 // @ is an alias to /src
 import cartWeather from '@/components/cartWeather.vue'
 import {mapActions, mapGetters} from 'vuex'
+import popup from '@/components/v-popup.vue'
+
 export default {
     name: 'Main',
-    components: { cartWeather },
+    components: { cartWeather, popup },
     data() {
         return {
+            removeCart: false,
+            objRemoveCart: {},
             cardWeather: [ 
                 {
                     lat: '',
@@ -26,19 +31,32 @@ export default {
     computed: {
       ...mapGetters([
         'CARDWEATHER',
+        'POPUP'
       ]),
     },
     methods: {
         ...mapActions([
             'ADD_CARDWEATHER',
             'REMOVE_CARDWEATHER',
-            'CHANGE_CARDWEATHER'
+            'CHANGE_CARDWEATHER',
+            'CHANGE_POPUP'
         ]),
         changeCity(data) {
             this.CHANGE_CARDWEATHER(data)
         },
+        removeCardModal(data) {
+            if(this.CARDWEATHER.length !== 1) {
+                this.CHANGE_POPUP(true)
+                this.objRemoveCart = data 
+            }
+        },
         removeCard(data) {
-            this.REMOVE_CARDWEATHER(data)
+            if(data) {
+                this.CHANGE_POPUP(false)
+                this.REMOVE_CARDWEATHER(this.objRemoveCart)
+            } else {
+                this.CHANGE_POPUP(false)
+            }
         },
         addFunction() {
             if(this.CARDWEATHER.length < 5) {

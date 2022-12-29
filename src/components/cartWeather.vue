@@ -98,7 +98,7 @@ export default {
         },
         removeCard() {
             // console.log(this.content.idx)
-            this.$emit('removeCard', this.content.idx)
+            this.$emit('removeCardModal', this.content.idx)
         },
         changeCity(data) {
             console.log('data')
