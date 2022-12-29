@@ -75,7 +75,6 @@ export default {
                 lon: '',
                 idx: ''
             }
-            console.log(this.CARDWEATHER)
         },
         removeCardModal(data) {
             if(this.CARDWEATHER.length !== 1) {
@@ -101,7 +100,6 @@ export default {
         }
     },
     mounted(){
-        console.log(this.CARDWEATHER)
     }
 
 }

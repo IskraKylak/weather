@@ -10,7 +10,7 @@
         </div> -->
         <infoCDay :content="objCard.info" />
     </div>
-    <div class="infoTown_grafic" v-if="chartData.labels.length !== 0">
+    <div class="infoTown_grafic" v-if="chartData.labels.length !== 0 && content.lat !== '' && content.lon !== ''">
         <Line
             id="my-chart-id"
             :options="chartOptions"
