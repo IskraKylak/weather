@@ -146,9 +146,11 @@ export default {
 }
 
 .inputTown {
-    height: desktop-vw(30);
-    padding: desktop-vw(5);
+    height: desktop-vw(40);
+    padding: 0 desktop-vw(10);
     font-size: desktop-vw(14);
+    border-radius: 5px;
+    border: 1px solid #000;
 }
 
 .wrapInput {
@@ -171,14 +173,23 @@ export default {
     cursor: pointer;
 
     &:hover {
-        color: #0000ff;
+        color: #0a69d4;
     }
 }
 
 .addFavorites {
-    padding: desktop-vw(10) desktop-vw(5);
+    padding: 0 desktop-vw(10);
+    height: desktop-vw(40);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     font-size: desktop-vw(14);
+    background: #0a69d4;
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+    font-weight: bold;
 }
 
 .favorite {
@@ -193,8 +204,9 @@ export default {
 
     .inputTown {
         height: mobile-vw(30);
-        padding: mobile-vw(5);
+        padding: 0 mobile-vw(5);
         font-size: mobile-vw(14);
+        box-sizing: border-box;
     }
 
     .citiesItem {
@@ -207,8 +219,10 @@ export default {
     }
 
     .addFavorites {
-        padding: mobile-vw(10) mobile-vw(5);
+        padding: 0 mobile-vw(5);
+        height: mobile-vw(30);
         font-size: mobile-vw(14);
+        box-sizing: border-box;
     }
 
     .favorite {

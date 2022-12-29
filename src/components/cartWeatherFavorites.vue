@@ -160,6 +160,10 @@ export default {
     // border: 1px solid #000;
     box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
     position: relative;
+
+    h2 {
+        font-size: desktop-vw(20);
+    }
 }
 
 .removeCard {
@@ -204,7 +208,11 @@ export default {
     }
 
     .cartWeather {
-        padding: mobile-vw(40);
+        padding: mobile-vw(50) mobile-vw(10) mobile-vw(10);
+        h2 {
+            font-size: mobile-vw(20);
+            margin-bottom:  mobile-vw(10);
+        }
     }
 
     .removeCard {
