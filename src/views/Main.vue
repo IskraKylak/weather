@@ -24,12 +24,7 @@ export default {
         }
     },
     methods: {
-        changeCity(data) {
-            // console.log('changeCity')
-            // console.log(data)
-            const index = this.cardWeather.findIndex(item => item.idx === data.idx);
-            this.cardWeather[index].lat = data.lat
-            this.cardWeather[index].lon = data.lon
+        resetCardWeather() {
             let mas = []
             for(let i = 0; i < this.cardWeather.length; i++) {
                 mas.push(this.cardWeather[i])
@@ -38,6 +33,14 @@ export default {
             for(let i = 0; i < mas.length; i++) {
                 this.cardWeather.push(mas[i])
             }
+        },
+        changeCity(data) {
+            // console.log('changeCity')
+            // console.log(data)
+            const index = this.cardWeather.findIndex(item => item.idx === data.idx);
+            this.cardWeather[index].lat = data.lat
+            this.cardWeather[index].lon = data.lon
+            this.resetCardWeather()
             // console.log(this.cardWeather)
             // console.log('-----------')
         },
@@ -45,15 +48,11 @@ export default {
             // console.log(data)
             const index = this.cardWeather.findIndex(item => item.idx === data);
             // console.log(index)
-            this.cardWeather.splice(index, 1);
-            let mas = []
-            for(let i = 0; i < this.cardWeather.length; i++) {
-                mas.push(this.cardWeather[i])
+            if(this.cardWeather.length !== 1) {
+                this.cardWeather.splice(index, 1);
+                this.resetCardWeather()
             }
-            this.cardWeather = []
-            for(let i = 0; i < mas.length; i++) {
-                this.cardWeather.push(mas[i])
-            }
+            
             // console.log('removeCard')
             // console.log(this.cardWeather)
             // console.log('--------')
@@ -69,21 +68,6 @@ export default {
             // console.log(this.cardWeather)
             // console.log('--------')
         }
-        // openCity(data) {
-        //     this.GET_DAYWEATHER_FROM_API(data).then((response) => {
-        //         if(response) {
-        //             card.info = response
-        //             this.GET_FORECAST_FROM_API(data).then((response) => {
-        //                 if(response) {
-        //                     for(let i = 0; i < 5; i++) {
-        //                         card.grafic.push(response.list[i])
-        //                     }
-        //                     this.cardWeather.push(card)
-        //                 }
-        //             })
-        //         }
-        //     }) 
-        // }
     },
 }
 </script>

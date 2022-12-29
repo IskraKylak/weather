@@ -8,7 +8,7 @@
                 </div>
             </div>
         </div>
-        <button>в избран.</button>
+        <button class="addFavorites" v-if="content.lat !== '' && content.lon !== ''" @click="addFavorites">Add to favorites</button>
     </div>
 </template>
 
@@ -17,6 +17,7 @@ import cities from 'cities.json';
 
 export default {
     components: { cities },
+    props:['content'],
     data() {
         return {
             allCities: cities,
@@ -26,6 +27,9 @@ export default {
         }
     },
     methods: {
+        addFavorites() {
+            this.$emit('addFavorites')
+        },
         changeCity(item) {
             this.resultTown = []
             this.searchTown = ''
@@ -82,6 +86,10 @@ export default {
     }
 }
 
+.addFavorites {
+    padding: desktop-vw(10) desktop-vw(5);
+    cursor: pointer;
+}
 
 </style>
 

@@ -11,7 +11,6 @@ export default {
     },
     actions: {
         SET_FORECAST ({commit}, payload) {
-            // обратимся к нашему комиту и візовем мутацию setNotify в кторую передадим payload
             commit('SET_FORECAST', payload)
         },
         GET_FORECAST_FROM_API({commit}, obj) {

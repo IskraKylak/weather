@@ -3,7 +3,6 @@
     <div class="removeCard" @click="removeCard">
 
     </div>
-    <headerCWeather @changeCity="changeCity" @addFavorites="addFavorites" :content="content" />
     <div class="infoTown" v-if="content.lat !== '' && content.lon !== ''">
         <!-- <div class="infoTown_wrapBtn">
             <button>Day</button>
@@ -26,7 +25,6 @@
 import { Line } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, PointElement, CategoryScale, LinearScale, LineElement } from 'chart.js'
 import infoCDay from '@/components/infoCDay.vue'
-import headerCWeather from '@/components/headerCWeather.vue'
 import moment from 'moment'
 import {mapActions, mapGetters} from 'vuex'
 
@@ -42,7 +40,7 @@ ChartJS.register(
 )
 export default {
     name: 'BarChart',
-    components: { Line, infoCDay, headerCWeather },
+    components: { Line, infoCDay },
     props:['content'],
     data() {
         return {
@@ -83,11 +81,7 @@ export default {
     },
     methods: {
         addFavorites() {
-            let obj = {
-                lat: this.cord.lat,
-                lon: this.cord.lon,
-            }
-            this.SET_FAVORITES(obj)
+            
         },
         removeCard() {
             // console.log(this.content.idx)
@@ -112,8 +106,7 @@ export default {
         },
         ...mapActions([
             'GET_DAYWEATHER_FROM_API',
-            'GET_FORECAST_FROM_API',
-            'SET_FAVORITES'
+            'GET_FORECAST_FROM_API'
         ]),
         apiWeather() {
             // console.log('this.content.lat')

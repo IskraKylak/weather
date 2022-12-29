@@ -12,7 +12,6 @@ export default {
     },
     actions: {
         SET_DAYWEATHER ({commit}, payload) {
-            // обратимся к нашему комиту и візовем мутацию setNotify в кторую передадим payload
             commit('SET_DAYWEATHER', payload)
         },
         GET_DAYWEATHER_FROM_API({commit}, obj) {
