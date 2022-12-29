@@ -2,7 +2,7 @@
   <div class="cartWeather">
     <div v-if="!firstElem" class="removeCard" @click="removeCard">
     </div>
-    <h2 v-if="content.lat === '' && content.lon === ''" >Enter your city!</h2>
+    <h2 v-if="content.lat === '' && content.lon === ''" >Enter your city</h2>
     <headerCWeather @changeCity="changeCity" @addFavorites="addFavorites" :content="content" :favorites="favorites" />
     <div class="infoTown" v-if="content.lat !== '' && content.lon !== ''">
         <!-- <div class="infoTown_wrapBtn">
