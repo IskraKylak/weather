@@ -1,6 +1,6 @@
 <template>
   <div class="cartWeather">
-    <div class="removeCard" @click="removeCard">
+    <div v-if="!firstElem" class="removeCard" @click="removeCard">
     </div>
     <h2 v-if="content.lat === '' && content.lon === ''" >Enter your city</h2>
     <headerCWeather @changeCity="changeCity" @addFavorites="addFavorites" :content="content" :favorites="favorites" />
@@ -42,7 +42,7 @@ ChartJS.register(
 export default {
     name: 'BarChart',
     components: { Line, infoCDay, headerCWeather },
-    props:['content'],
+    props:['content', 'firstElem'],
     data() {
         return {
             favorites: false,
