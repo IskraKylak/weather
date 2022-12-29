@@ -1,17 +1,17 @@
 <template>
-  <div class="cartWeather" v-if="objCard.info">
-    <div class="removeCard">
+  <div class="cartWeather">
+    <div class="removeCard" @click="removeCard">
 
     </div>
-    <headerCWeather @openCity="openCity" />
-    <div class="infoTown">
+    <headerCWeather @changeCity="changeCity" />
+    <div class="infoTown" v-if="content.lat !== '' && content.lon !== ''">
         <div class="infoTown_wrapBtn">
             <button>Day</button>
             <button>5 дней</button>
         </div>
-        <infoCDay :content="objCard.info" />
+        <infoCDay v-if="objCard.info" :content="objCard.info" />
     </div>
-    <div class="infoTown_grafic" v-if="chartData.labels.length !== 0">
+    <div class="infoTown_grafic" v-if="chartData.labels.length !== 0 && content.lat !== '' && content.lon !== ''">
         <Line
             id="my-chart-id"
             :options="chartOptions"
@@ -43,12 +43,12 @@ ChartJS.register(
 export default {
     name: 'BarChart',
     components: { Line, infoCDay, headerCWeather },
-    props:['idx'],
+    props:['content'],
     data() {
         return {
             cord: {
-                lat: '51.5128',
-                lon: '-0.0918'
+                lat: '',
+                lon: ''
             },
             objCard: {
                 info: false,
@@ -82,10 +82,25 @@ export default {
         }
     },
     methods: {
-        openCity(data) {
+        removeCard() {
+            // console.log(this.content.idx)
+            this.$emit('removeCard', this.content.idx)
+        },
+        changeCity(data) {
+            console.log('data')
             console.log(data)
             this.cord.lat = data.lat
             this.cord.lon = data.lng
+            let obj = {
+                lat: data.lat,
+                lon: data.lng,
+                idx: this.content.idx
+            }
+
+            // console.log('obj')
+            // console.log(obj)
+            // console.log('-----------')
+            this.$emit('changeCity', obj)
             this.apiWeather()
         },
         ...mapActions([
@@ -93,30 +108,43 @@ export default {
             'GET_FORECAST_FROM_API'
         ]),
         apiWeather() {
-            this.GET_DAYWEATHER_FROM_API(this.cord).then((response) => {
-                if(response) {
-                    this.objCard.info = response
-                    this.GET_FORECAST_FROM_API(this.cord).then((response) => {
-                        if(response) {
-                            for(let i = 0; i < 5; i++) {
-                                this.objCard.grafic.push(response.list[i])
-                            }
+            // console.log('this.content.lat')
+            // console.log(this.content.lat)
+            // console.log(this.content.lon)
+            // console.log('-----------')
+            this.cord.lat = this.content.lat
+            this.cord.lon = this.content.lon
+            if(this.cord.lat !== '' && this.cord.lon !== "") {
+                this.GET_DAYWEATHER_FROM_API(this.cord).then((response) => {
+                    if(response) {
+                        this.objCard.info = response
+                        this.GET_FORECAST_FROM_API(this.cord).then((response) => {
+                            if(response) {
+                                for(let i = 0; i < 5; i++) {
+                                    this.objCard.grafic.push(response.list[i])
+                                }
 
-                            let mas = []
-                            for(let i = 0; i < this.objCard.grafic.length; i++) { 
-                                let date = moment(this.objCard.grafic[i].dt_txt, "YYYY-MM-DD HH:mm:ss");
-                                this.chartData.labels.push(date.format('HH:mm'))
-                                mas.push(this.objCard.grafic[i].main.temp)
+                                let mas = []
+                                for(let i = 0; i < this.objCard.grafic.length; i++) { 
+                                    let date = moment(this.objCard.grafic[i].dt_txt, "YYYY-MM-DD HH:mm:ss");
+                                    this.chartData.labels.push(date.format('HH:mm'))
+                                    mas.push(this.objCard.grafic[i].main.temp)
+                                }
+                                this.chartData.datasets[0].data = mas
                             }
-                            this.chartData.datasets[0].data = mas
-                        }
-                    })
-                }
-            })  
+                        })
+                    }
+                })  
+            }
         }
     },
     mounted() {
         this.apiWeather()
+    },
+    watch: {
+        content(newSearch, oldSearch) {
+            this.apiWeather()
+        }
     }
 }
 </script>
@@ -142,6 +170,11 @@ export default {
     height: desktop-vw(20);
     width: desktop-vw(20);
     cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        transform: scale(1.1);
+    }
 
     &:before {
         content: "";

@@ -3,7 +3,7 @@
         <div class="wrapInput">
             <input type="text" v-model="searchTown" class="inputTown" placeholder="Search City">
             <div class="citiesList" v-if="resultTown.length !== 0">
-                <div v-for="(item, idx) in resultTown" :key="idx" class="citiesItem" @click="openCity(item)">
+                <div v-for="(item, idx) in resultTown" :key="idx" class="citiesItem" @click="changeCity(item)">
                     {{ item.name }}, {{item.country}}
                 </div>
             </div>
@@ -26,9 +26,10 @@ export default {
         }
     },
     methods: {
-        openCity(item) {
+        changeCity(item) {
             this.resultTown = []
-            this.$emit('openCity', item)
+            this.searchTown = ''
+            this.$emit('changeCity', item)
         }
     },
     watch: {
