@@ -72,6 +72,8 @@ export default {
             .catch(error => {
                 console.log(error)
                 this.$message('Error')
+                this.objChange.lat = ''
+                this.objChange.lon = ''
             })
             this.CHANGE_CARDWEATHER(this.objChange)
             this.objChange = {
