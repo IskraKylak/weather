@@ -1,5 +1,5 @@
 <template>
-    <div class="infoDay">
+    <div class="infoDay" v-if="content">
         <h2 >
             {{content.name}}, {{content.sys.country}}
         </h2>

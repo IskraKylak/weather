@@ -29,6 +29,7 @@ export default {
           if(data) {
             this.CHANGE_POPUP(false)
             this.REMOVE_FAVORITES(this.objRemoveCart)
+            this.$message('Card removed')
           } else {
             this.CHANGE_POPUP(false)
           }

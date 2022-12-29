@@ -11,6 +11,7 @@
 import cartWeather from '@/components/cartWeather.vue'
 import {mapActions, mapGetters} from 'vuex'
 import popup from '@/components/v-popup.vue'
+import axios from 'axios'
 
 export default {
     name: 'Main',
@@ -19,6 +20,13 @@ export default {
         return {
             removeCart: false,
             objRemoveCart: {},
+            objChange: {
+                name: '',
+                country: '',
+                lat: '',
+                lon: '',
+                idx: ''
+            },
             cardWeather: [ 
                 {
                     lat: '',
@@ -41,19 +49,45 @@ export default {
             'CHANGE_CARDWEATHER',
             'CHANGE_POPUP'
         ]),
-        changeCity(data) {
-            this.CHANGE_CARDWEATHER(data)
+        async changeCity(data) {
+            this.objChange = data
+            // console.log(data)
+            await axios({
+                url: `http://api.openweathermap.org/geo/1.0/direct?q=${data.name},${data.country}&limit=5&appid=04326dad12753de68c09cafdec856895`,
+                method: 'GET',
+            })
+            .then(respons => {
+                if(respons) {
+                    // console.log(respons.data[0])
+                    this.objChange.lat = respons.data[0].lat
+                    this.objChange.lon = respons.data[0].lon
+                }
+            })
+            .catch(error => {
+                console.log(error)
+                this.$message('Error')
+            })
+            this.CHANGE_CARDWEATHER(this.objChange)
+            this.objChange = {
+                name: '',
+                country: '',
+                lat: '',
+                lon: '',
+                idx: ''
+            }
+            console.log(this.CARDWEATHER)
         },
         removeCardModal(data) {
             if(this.CARDWEATHER.length !== 1) {
                 this.CHANGE_POPUP(true)
                 this.objRemoveCart = data 
-            }
+            } 
         },
         removeCard(data) {
             if(data) {
                 this.CHANGE_POPUP(false)
                 this.REMOVE_CARDWEATHER(this.objRemoveCart)
+                this.$message('Card removed')
             } else {
                 this.CHANGE_POPUP(false)
             }
@@ -61,9 +95,15 @@ export default {
         addFunction() {
             if(this.CARDWEATHER.length < 5) {
                 this.ADD_CARDWEATHER()
+            } else {
+                this.$message('Remove city to add')
             }
         }
     },
+    mounted(){
+        console.log(this.CARDWEATHER)
+    }
+
 }
 </script>
 <style scoped lang="scss">
@@ -84,7 +124,7 @@ export default {
     width: desktop-vw(50);
     cursor: pointer;
     transition: all 0.3s ease;
-    background: #00f;
+    background: #0a69d4;
     border-radius: 50%;
     border: 0;
     

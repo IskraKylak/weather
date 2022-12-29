@@ -33,19 +33,21 @@ export default {
         changeCity(item) {
             this.resultTown = []
             this.searchTown = ''
+            // console.log('item')
+            // console.log(item)
             this.$emit('changeCity', item)
         }
     },
     watch: {
         searchTown(newSearch, oldSearch) {
-        if (newSearch.length > 2 ) {
-            this.resultTown = this.allCities.filter(item => item.name.includes(newSearch))
-            if(this.resultTown.length === 0) {
-                this.resultTown.push({name: "Not Found"})
+            if (newSearch.length > 2 ) {
+                this.resultTown = this.allCities.filter(item => item.name.includes(newSearch))
+                if(this.resultTown.length === 0) {
+                    this.resultTown.push({name: "Not Found"})
+                }
+            } else {
+                this.resultTown = []
             }
-        } else {
-            this.resultTown = []
-        }
         }
     }
 }
@@ -56,6 +58,7 @@ export default {
     display: flex;
     widows: 100%;
     justify-content: space-between;
+    margin-bottom: desktop-vw(10);
 }
 
 .inputTown {

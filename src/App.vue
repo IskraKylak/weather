@@ -5,6 +5,7 @@
       <router-link to="/favorites">Favorites</router-link>
     </nav>
     <router-view/>
+    <div id="message" class="hidden-xs"></div>
   </div>
 </template>
 
@@ -15,6 +16,25 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+#message {
+    padding: desktop-vw(20);
+    position: fixed;
+    top: 40vh;
+    right: 10vh;
+    background: #0a69d4;
+    z-index: 100;
+    color: #fff;
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+
+    &.hidden-xs {
+      visibility: hidden;
+      opacity: 0;
+    }
 }
 
 nav {

@@ -1,7 +1,6 @@
 <template>
   <div class="cartWeather">
     <div class="removeCard" @click="removeCard">
-
     </div>
     <headerCWeather @changeCity="changeCity" @addFavorites="addFavorites" :content="content" />
     <div class="infoTown" v-if="content.lat !== '' && content.lon !== ''">
@@ -9,9 +8,9 @@
             <button>Day</button>
             <button>5 дней</button>
         </div> -->
-        <infoCDay v-if="objCard.info" :content="objCard.info" />
+        <infoCDay :content="objCard.info" />
     </div>
-    <div class="infoTown_grafic" v-if="chartData.labels.length !== 0 && content.lat !== '' && content.lon !== ''">
+    <div class="infoTown_grafic" v-if="chartData.labels.length !== 0">
         <Line
             id="my-chart-id"
             :options="chartOptions"
@@ -29,7 +28,6 @@ import infoCDay from '@/components/infoCDay.vue'
 import headerCWeather from '@/components/headerCWeather.vue'
 import moment from 'moment'
 import {mapActions, mapGetters} from 'vuex'
-
 
 ChartJS.register(
     CategoryScale,
@@ -59,7 +57,7 @@ export default {
                 datasets: [
                     {
                         label: 'temperature',
-                        backgroundColor: '#0000ff',
+                        backgroundColor: '#0a69d4',
                         data: []
                     }
                 ]
@@ -93,7 +91,10 @@ export default {
                 lon: this.cord.lon,
             }
             if(this.FAVORITES.length < 5) {
+                this.$message('Card added to favorites')
                 this.ADD_FAVORITES(obj)
+            } else {
+                this.$message('Remove city to add')
             }
         },
         removeCard() {
@@ -101,21 +102,20 @@ export default {
             this.$emit('removeCardModal', this.content.idx)
         },
         changeCity(data) {
-            console.log('data')
-            console.log(data)
-            this.cord.lat = data.lat
-            this.cord.lon = data.lng
+            // console.log('data')
+            // console.log(data)
             let obj = {
-                lat: data.lat,
-                lon: data.lng,
+                name: data.name,
+                country: data.country,
                 idx: this.content.idx
             }
 
             // console.log('obj')
             // console.log(obj)
             // console.log('-----------')
+            // this.apiWeather()
             this.$emit('changeCity', obj)
-            this.apiWeather()
+            // this.apiWeather()
         },
         ...mapActions([
             'GET_DAYWEATHER_FROM_API',
@@ -129,7 +129,7 @@ export default {
             // console.log('-----------')
             this.cord.lat = this.content.lat
             this.cord.lon = this.content.lon
-            if(this.cord.lat !== '' && this.cord.lon !== "") {
+            if(this.content.lat !== '' && this.content.lon !== "") {
                 this.GET_DAYWEATHER_FROM_API(this.cord).then((response) => {
                     if(response) {
                         this.objCard.info = response
@@ -157,9 +157,12 @@ export default {
         this.apiWeather()
     },
     watch: {
-        content(newSearch, oldSearch) {
-            this.apiWeather()
-        }
+        content: {
+            handler(val, oldVal) {
+                this.apiWeather()
+            },
+            deep: true
+        },
     }
 }
 </script>
