@@ -1,18 +1,18 @@
 <template>
     <div class="favorites">
-        <cartWeatherFavorites v-for="(item, idx) in FAVORITES" :key="idx" :content="item" @removeCardModal="removeCardModal" />
+        <cartWeather v-for="(item, idx) in FAVORITES" :key="idx" :favoriteList="true" :content="item" @removeCardModal="removeCardModal" />
     </div>
     <popup v-if="POPUP" @removeCard="removeCard" @closePopup="closePackage"/>
 </template>
 
 <script>
-import cartWeatherFavorites from '@/components/cartWeatherFavorites.vue'
+import cartWeather from '@/components/cartWeather.vue'
 import popup from '@/components/v-popup.vue'
 // @ is an alias to /src
 import {mapActions, mapGetters} from 'vuex'
 export default {
     name: 'Favorites',
-    components: { cartWeatherFavorites, popup },
+    components: { cartWeather, popup },
     data() {
         return {
             objRemoveCart: {},

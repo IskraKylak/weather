@@ -2,8 +2,8 @@
   <div class="cartWeather">
     <div v-if="!firstElem" class="removeCard" @click="removeCard">
     </div>
-    <h2 v-if="content.lat === '' && content.lon === ''" >Enter your city</h2>
-    <headerCWeather @changeCity="changeCity" @addFavorites="addFavorites" :content="content" :favorites="favorites" />
+    <h2 v-if="content.lat === '' && content.lon === '' && !favoriteList" >Enter your city</h2>
+    <headerCWeather v-if="!favoriteList" @changeCity="changeCity" @addFavorites="addFavorites" :content="content" :favorites="favorites" />
     <div class="infoTown" v-if="content.lat !== '' && content.lon !== ''">
         <!-- <div class="infoTown_wrapBtn">
             <button>Day</button>
@@ -42,7 +42,7 @@ ChartJS.register(
 export default {
     name: 'BarChart',
     components: { Line, infoCDay, headerCWeather },
-    props:['content', 'firstElem'],
+    props:['content', 'firstElem', 'favoriteList'],
     data() {
         return {
             favorites: false,

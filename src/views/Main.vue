@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <cartWeather v-for="(item, idx) in CARDWEATHER" :key="idx" :firstElem="firstElem" :content="item" @changeCity="changeCity" @removeCardModal="removeCardModal" />
+        <cartWeather v-for="(item, idx) in CARDWEATHER" :key="idx" :favoriteList="false" :firstElem="firstElem" :content="item" @changeCity="changeCity" @removeCardModal="removeCardModal" />
     </div>
     <button class="addCart" title="Add to card" @click="addFunction"></button>
     <popup v-if="POPUP" @removeCard="removeCard" @closePopup="closePackage"/>
