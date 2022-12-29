@@ -48,5 +48,10 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-
+.favorites {
+    display: flex;
+    flex-direction: column;
+    grid-gap: desktop-vw(40);
+    padding-bottom: desktop-vw(50);
+}
 </style>

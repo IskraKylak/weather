@@ -110,6 +110,7 @@ export default {
     display: flex;
     flex-direction: column;
     grid-gap: desktop-vw(40);
+    padding-bottom: desktop-vw(50);
 }
 
 .addCart {

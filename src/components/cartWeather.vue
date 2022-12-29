@@ -2,6 +2,7 @@
   <div class="cartWeather">
     <div class="removeCard" @click="removeCard">
     </div>
+    <h2 v-if="content.lat === '' && content.lon === ''" >Enter your city</h2>
     <headerCWeather @changeCity="changeCity" @addFavorites="addFavorites" :content="content" :favorites="favorites" />
     <div class="infoTown" v-if="content.lat !== '' && content.lon !== ''">
         <!-- <div class="infoTown_wrapBtn">
@@ -90,6 +91,7 @@ export default {
             let obj = {
                 lat: this.cord.lat,
                 lon: this.cord.lon,
+                idx: this.content.idx
             }
             if(this.FAVORITES.length < 5) {
                 this.$message('Card added to favorites')
@@ -166,6 +168,8 @@ export default {
                         })
                     }
                 })  
+            } else {
+                this.favorites = false
             }
         }
     },
