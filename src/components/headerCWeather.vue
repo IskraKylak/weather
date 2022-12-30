@@ -125,7 +125,19 @@ export default {
     watch: {
         searchTown(newSearch, oldSearch) {
             if (newSearch.length > 2 ) {
-                this.resultTown = this.allCities.filter(item => item.name.includes(newSearch))
+                
+                const splitted = newSearch.split("")
+
+                const first = splitted[0].toUpperCase()
+
+                const rest = [...splitted] 
+
+ 
+                rest.splice(0, 1)
+
+                const result = [first, ...rest].join("")
+
+                this.resultTown = this.allCities.filter(item => item.name.includes(result))
                 if(this.resultTown.length === 0) {
                     this.resultTown.push({name: "Not Found"})
                 }
