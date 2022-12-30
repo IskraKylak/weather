@@ -39,6 +39,9 @@ export default {
             'CHANGE_POPUP'
         ]),
     },
+    mounted() {
+        console.log(this.FAVORITES)
+    },
     computed: {
       ...mapGetters([
         'FAVORITES',

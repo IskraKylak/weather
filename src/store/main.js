@@ -19,6 +19,7 @@ export default {
         },
         REMOVE_CARDWEATHER(state, payload) {
             if(state.cardWeather.length !== 1) {
+                console.log(payload)
                 const index = state.cardWeather.findIndex(item => item.idx === payload);
                 state.cardWeather.splice(index, 1);
             }
@@ -28,6 +29,7 @@ export default {
             const index = state.cardWeather.findIndex(item => item.idx === payload.idx);
             state.cardWeather[index].lat = payload.lat
             state.cardWeather[index].lon = payload.lon
+            state.cardWeather[index].idx = payload.lat + payload.lon
         }
     },
     actions: {

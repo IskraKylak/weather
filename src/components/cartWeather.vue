@@ -48,7 +48,8 @@ export default {
             favorites: false,
             cord: {
                 lat: '',
-                lon: ''
+                lon: '',
+                idx: ''
             },
             objCard: {
                 info: false,
@@ -91,12 +92,13 @@ export default {
             let obj = {
                 lat: this.cord.lat,
                 lon: this.cord.lon,
-                idx: this.content.idx
+                idx: this.cord.idx
             }
             if(this.FAVORITES.length < 5) {
                 this.$message('Card added to favorites')
                 this.ADD_FAVORITES(obj)
                 this.favorites = true
+                console.log(this.FAVORITES)
             } else {
                 this.$message('Remove city to add')
             }
@@ -111,7 +113,7 @@ export default {
             let obj = {
                 name: data.name,
                 country: data.country,
-                idx: this.content.idx
+                idx: this.cord.idx
             }
 
             // console.log('obj')
@@ -133,6 +135,7 @@ export default {
             // console.log('-----------')
             this.cord.lat = this.content.lat
             this.cord.lon = this.content.lon
+            this.cord.idx = this.content.idx
             
             if(this.content.lat !== '' && this.content.lon !== "") {
 
