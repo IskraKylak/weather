@@ -98,7 +98,6 @@ export default {
                 this.$message('Card added to favorites')
                 this.ADD_FAVORITES(obj)
                 this.favorites = true
-                console.log(this.FAVORITES)
             } else {
                 this.$message('Remove city to add')
             }
