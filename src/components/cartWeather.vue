@@ -13,6 +13,7 @@
     </div>
     <div class="infoTown_grafic" v-if="chartData.labels.length !== 0 && content.lat !== '' && content.lon !== ''">
         <Line
+            v-if="resetGrafic"
             id="my-chart-id"
             :options="chartOptions"
             :data="chartData"
@@ -46,6 +47,7 @@ export default {
     data() {
         return {
             favorites: false,
+            resetGrafic: true,
             cord: {
                 lat: '',
                 lon: '',
@@ -107,20 +109,15 @@ export default {
             this.$emit('removeCardModal', this.content.idx)
         },
         changeCity(data) {
-            // console.log('data')
-            // console.log(data)
+            this.resetGrafic = false
+            this.chartData.labels = []
+            this.chartData.datasets[0].data = []
             let obj = {
                 name: data.name,
                 country: data.country,
                 idx: this.cord.idx
             }
-
-            // console.log('obj')
-            // console.log(obj)
-            // console.log('-----------')
-            // this.apiWeather()
             this.$emit('changeCity', obj)
-            // this.apiWeather()
         },
         ...mapActions([
             'GET_DAYWEATHER_FROM_API',
@@ -135,9 +132,7 @@ export default {
             this.cord.lat = this.content.lat
             this.cord.lon = this.content.lon
             this.cord.idx = this.content.idx
-            
             if(this.content.lat !== '' && this.content.lon !== "") {
-
                 let tmpContent = this
                 let tmpMas = this.FAVORITES.filter(function(item) {
                     if(item.lat == tmpContent.content.lat && item.lon == tmpContent.content.lon) {
@@ -149,12 +144,13 @@ export default {
                 } else {
                     this.favorites = false
                 }
-
+                
                 this.GET_DAYWEATHER_FROM_API(this.cord).then((response) => {
                     if(response) {
                         this.objCard.info = response
                         this.GET_FORECAST_FROM_API(this.cord).then((response) => {
                             if(response) {
+                                this.objCard.grafic= []
                                 for(let i = 0; i < 5; i++) {
                                     this.objCard.grafic.push(response.list[i])
                                 }
@@ -169,7 +165,8 @@ export default {
                             }
                         })
                     }
-                })  
+                })
+                this.resetGrafic = true  
             } else {
                 this.favorites = false
             }
@@ -181,6 +178,7 @@ export default {
     watch: {
         content: {
             handler(val, oldVal) {
+                this.resetGrafic = false
                 this.apiWeather()
             },
             deep: true

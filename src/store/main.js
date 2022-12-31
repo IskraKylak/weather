@@ -14,7 +14,7 @@ export default {
             state.cardWeather.push({
                 lat: '',
                 lon: '',
-                idx: state.cardWeather[state.cardWeather.length - 1].idx + 1
+                idx: Math.random().toString(16).slice(2)
             })
         },
         REMOVE_CARDWEATHER(state, payload) {
@@ -29,7 +29,7 @@ export default {
             const index = state.cardWeather.findIndex(item => item.idx === payload.idx);
             state.cardWeather[index].lat = payload.lat
             state.cardWeather[index].lon = payload.lon
-            state.cardWeather[index].idx = payload.lat + payload.lon
+            state.cardWeather[index].idx = Math.random().toString(16).slice(2)
         }
     },
     actions: {
